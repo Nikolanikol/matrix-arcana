@@ -29,18 +29,18 @@ export function CelestialOrrery() {
           <stop offset=".5" stopColor="#C9A84C" stopOpacity=".72" />
           <stop offset="1" stopColor="#7A5123" stopOpacity=".35" />
         </linearGradient>
-        <radialGradient id="orrery-amethyst" cx="0" cy="0" r="1" gradientTransform="matrix(75 82 -78 71 324 278)" gradientUnits="userSpaceOnUse">
+        <radialGradient id="orrery-amethyst" cx="324" cy="278" r="124" gradientUnits="userSpaceOnUse">
           <stop stopColor="#C8A3FF" />
           <stop offset=".24" stopColor="#7850B3" />
           <stop offset=".58" stopColor="#33204D" />
           <stop offset=".82" stopColor="#17111F" />
           <stop offset="1" stopColor="#08070D" />
         </radialGradient>
-        <radialGradient id="orrery-core-light" cx="0" cy="0" r="1" gradientTransform="matrix(0 145 -145 0 350 337)" gradientUnits="userSpaceOnUse">
+        <radialGradient id="orrery-core-light" cx="350" cy="337" r="145" gradientUnits="userSpaceOnUse">
           <stop stopColor="#C9A84C" stopOpacity=".24" />
           <stop offset="1" stopColor="#C9A84C" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="orrery-jewel" cx="0" cy="0" r="1" gradientTransform="matrix(15 17 -16 14 0 0)" gradientUnits="userSpaceOnUse">
+        <radialGradient id="orrery-jewel" cx=".25" cy=".22" r=".9">
           <stop stopColor="#F7E4B4" />
           <stop offset=".28" stopColor="#C9A84C" />
           <stop offset=".5" stopColor="#7C5CBF" />
