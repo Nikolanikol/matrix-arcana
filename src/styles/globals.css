@@ -65,39 +65,48 @@
 
 /* ── Celestial motion ─────────────────────────────────────────── */
 
-/* Layer A: Ken Burns ambient image */
+/* Layer A: Atmospheric ambient — Ken Burns, behind main scene */
 .ma-layer-a {
   position: absolute; inset: -3%; width: 106%; height: 106%;
   object-fit: cover; object-position: center 46%;
-  opacity: .58;
-  animation: ma-drift 38s ease-in-out infinite alternate;
+  opacity: .55;
+  animation: ma-drift 42s ease-in-out infinite alternate;
   will-change: transform;
 }
 
-/* Layer B: Star twinkle overlay */
-.ma-layer-b { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* Main hero image — Ken Burns (independent from ambient) */
+.ma-hero-main {
+  animation: ma-hero-drift 38s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Layer B: Stars — positioned above main scene, parallax drift */
+.ma-layer-stars {
+  position: absolute; inset: -2%; width: 104%; height: 104%;
+  object-fit: cover; object-position: center;
+  opacity: .72;
+  animation: ma-star-parallax 58s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
 
 /* Hero: radial gradient only over the left text area */
 .ma-hero-text-veil {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 25% 50%, rgba(13,11,20,.42) 0%, rgba(13,11,20,.22) 42%, rgba(13,11,20,0) 75%);
+  background: radial-gradient(ellipse at 22% 52%, rgba(13,11,20,.40) 0%, rgba(13,11,20,.18) 45%, rgba(13,11,20,0) 72%);
 }
 
-/* Hero: bottom section fade (last ~25% height) */
+/* Hero: bottom section fade (~18% height, soft edge) */
 .ma-hero-bottom-fade {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 28%;
-  background: linear-gradient(to top, #0D0B14 0%, rgba(13,11,20,.62) 48%, transparent 100%);
+  position: absolute; left: 0; right: 0; bottom: 0; height: 18%;
+  background: linear-gradient(to top, #0D0B14 0%, rgba(13,11,20,.52) 52%, transparent 100%);
 }
 
 /* Orbit rings */
 .ma-orbit { transform-origin: 50% 50%; animation: ma-orbit 100s linear infinite; }
 .ma-orbit--reverse { animation-direction: reverse; }
 
-/* Gold glow pulse (Layer C, 9 s) */
+/* Gold glow pulse */
 .ma-glow { animation: ma-glow 9s ease-in-out infinite; }
-
-/* Star twinkle (Layer B) */
-.ma-starfield { animation: ma-twinkle 9s ease-in-out infinite alternate; }
 
 /* Content entrance */
 .ma-reveal { animation: ma-reveal .9s cubic-bezier(.2,.7,.2,1) both; }
@@ -123,20 +132,31 @@
   box-shadow: 0 8px 28px rgba(201,168,76,.10);
 }
 
+/* Ambient background drift */
 @keyframes ma-drift {
   from { transform: scale(1)    translate3d(-.4%,  0,    0); }
-  to   { transform: scale(1.04) translate3d( .4%, -.6%,  0); }
+  to   { transform: scale(1.04) translate3d( .4%, -.5%,  0); }
+}
+/* Main hero image Ken Burns — slightly different direction from ambient */
+@keyframes ma-hero-drift {
+  from { transform: scale(1)    translate3d(  0,    0,   0); }
+  to   { transform: scale(1.04) translate3d(-.3%, -.4%,  0); }
+}
+/* Star parallax — moves in opposite direction to hero for depth illusion */
+@keyframes ma-star-parallax {
+  from { transform: scale(1.03) translate3d(   0,    0, 0); opacity: .62; }
+  to   { transform: scale(1.03) translate3d(1.6%, .55%, 0); opacity: .80; }
 }
 @keyframes ma-orbit { to { transform: rotate(360deg); } }
 @keyframes ma-glow {
   0%, 100% { opacity: .68; filter: drop-shadow(0 0 5px rgba(201,168,76,.18)); }
   50%      { opacity: 1;   filter: drop-shadow(0 0 20px rgba(201,168,76,.44)); }
 }
-@keyframes ma-twinkle { 0% { opacity: .38; } 100% { opacity: .80; } }
 @keyframes ma-reveal  { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .ma-layer-a, .ma-orbit, .ma-glow, .ma-starfield, .ma-reveal {
+  .ma-layer-a, .ma-hero-main, .ma-layer-stars,
+  .ma-orbit, .ma-glow, .ma-reveal {
     animation: none !important; transform: none !important; transition: none !important;
   }
   [data-reveal].reveal-ready { opacity: 1 !important; transform: none !important; }

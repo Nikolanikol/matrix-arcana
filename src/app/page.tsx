@@ -13,46 +13,51 @@ export default function HomePage() {
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section
         aria-labelledby="hero-heading"
-        className="relative flex items-end lg:items-center min-h-[100dvh] overflow-hidden"
+        className="isolate relative flex items-end lg:items-center min-h-[100dvh] overflow-hidden"
       >
-        {/* Layer A: Ken Burns ambient background */}
+        {/* Layer A: Atmospheric ambient — behind main scene */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/backgrounds/cosmos-ambient.webp" alt="" className="ma-layer-a" />
         </div>
 
-        {/* Layer B: Star twinkle overlay */}
-        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/backgrounds/bg-stars.webp" alt="" className="ma-layer-b ma-starfield" />
-        </div>
-
-        {/* Layer 2a: Desktop hero cosmic art */}
+        {/* Layer 1a: Desktop hero cosmic art — full opacity, Ken Burns */}
         <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
           <Image
             src="/images/hero/hero-cosmic-main.webp"
             alt=""
             fill
-            className="object-cover object-[62%_38%] opacity-80"
+            className="ma-hero-main object-cover object-[62%_38%]"
             sizes="100vw"
             priority
           />
-          {/* Radial gradient — only darkens the left text zone */}
-          <div className="ma-hero-text-veil" />
         </div>
 
-        {/* Layer 2b: Mobile hero cosmic art */}
+        {/* Layer 1b: Mobile hero cosmic art */}
         <div className="pointer-events-none absolute inset-0 lg:hidden" aria-hidden="true">
           <Image
             src="/images/hero/hero-cosmic-mobile.webp"
             alt=""
             fill
-            className="object-cover object-[50%_22%] opacity-60"
+            className="ma-hero-main object-cover object-[50%_22%] opacity-90"
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-bg-base/30 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-bg-base/20 via-transparent to-transparent" />
         </div>
+
+        {/* Layer 2: Stars — above main scene, mix-blend-mode screen for additive brightness */}
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+          style={{ mixBlendMode: 'screen' }}
+          aria-hidden="true"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/backgrounds/bg-stars.webp" alt="" className="ma-layer-stars" />
+        </div>
+
+        {/* Layer 3: Text veil — radial gradient under text area only */}
+        <div className="pointer-events-none absolute inset-0 ma-hero-text-veil" aria-hidden="true" />
 
         {/* Bottom fade — both breakpoints */}
         <div className="ma-hero-bottom-fade pointer-events-none" aria-hidden="true" />
@@ -67,7 +72,7 @@ export default function HomePage() {
           <img src="/graphics/starburst.svg" alt="" className="ma-glow w-10 opacity-55" />
         </div>
 
-        {/* Layer D: Sacred orbit rings (desktop) */}
+        {/* Layer D: Sacred orbit rings (desktop) — 55s per spec */}
         <div
           className="pointer-events-none absolute hidden -translate-y-1/2 lg:block"
           style={{ right: '3vw', top: '50%' }}
@@ -78,6 +83,7 @@ export default function HomePage() {
             src="/graphics/sacred-orbit.svg"
             alt=""
             className="ma-orbit opacity-[0.32] w-[28rem] xl:w-[34rem]"
+            style={{ animationDuration: '55s' }}
           />
         </div>
 
