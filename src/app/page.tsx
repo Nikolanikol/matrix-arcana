@@ -14,14 +14,14 @@ export default function HomePage() {
       {/* ── Hero: atmospheric scene + object-based celestial orrery ── */}
       <section
         aria-labelledby="hero-heading"
-        className="ma-hero isolate relative flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden"
+        className="ma-hero isolate relative flex min-h-[calc(100dvh-4rem)] items-end overflow-hidden lg:items-center"
       >
         <div className="ma-hero__base absolute inset-0" aria-hidden="true" />
 
         {/* Use the existing nebula as an atmosphere, not a flat image card. */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
-            src="/images/backgrounds/cosmos-ambient.webp"
+            src="/images/backgrounds/bg-nebula.webp"
             alt=""
             fill
             priority
