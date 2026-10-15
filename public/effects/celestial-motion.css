@@ -1,0 +1,16 @@
+/* Matrix Arcana — optional motion layer. Import only where needed. */
+.ma-cosmic-bg{position:absolute;inset:0;overflow:hidden;isolation:isolate;pointer-events:none;background:linear-gradient(180deg,rgba(13,11,20,.16),#0D0B14 94%)}
+.ma-cosmic-bg__image{position:absolute;inset:-3%;width:106%;height:106%;object-fit:cover;object-position:center 46%;opacity:.76;animation:ma-drift 42s ease-in-out infinite alternate;will-change:transform}
+.ma-cosmic-bg__veil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 10%,rgba(13,11,20,.12) 48%,#0D0B14 100%),linear-gradient(180deg,rgba(13,11,20,.08),rgba(13,11,20,.12) 58%,#0D0B14 100%)}
+.ma-orbit{transform-origin:50% 50%;animation:ma-orbit 100s linear infinite}
+.ma-orbit--reverse{animation-direction:reverse;animation-duration:145s}
+.ma-glow{animation:ma-glow 7s ease-in-out infinite}
+.ma-starfield{animation:ma-twinkle 8s ease-in-out infinite alternate}
+.ma-reveal{animation:ma-reveal .9s cubic-bezier(.2,.7,.2,1) both}
+.ma-reveal--delay-1{animation-delay:.14s}.ma-reveal--delay-2{animation-delay:.28s}.ma-reveal--delay-3{animation-delay:.42s}
+@keyframes ma-drift{from{transform:scale(1) translate3d(-.4%,0,0)}to{transform:scale(1.045) translate3d(.4%,-.6%,0)}}
+@keyframes ma-orbit{to{transform:rotate(360deg)}}
+@keyframes ma-glow{0%,100%{opacity:.72;filter:drop-shadow(0 0 5px rgba(201,168,76,.16))}50%{opacity:1;filter:drop-shadow(0 0 18px rgba(201,168,76,.36))}}
+@keyframes ma-twinkle{0%{opacity:.48}100%{opacity:.92}}
+@keyframes ma-reveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.ma-cosmic-bg__image,.ma-orbit,.ma-glow,.ma-starfield,.ma-reveal{animation:none!important;transform:none!important;transition:none!important}}

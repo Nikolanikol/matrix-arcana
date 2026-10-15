@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ───────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-bg-base:           #0D0B14;
+  --color-bg-base-rgb:       13 11 20;   /* RGB channels for Tailwind opacity modifiers */
+  --color-bg-surface:        #15121F;
+  --color-accent-gold:       #C9A84C;
+  --color-accent-violet:     #7C5CBF;
+  --color-text-primary:      #F0ECE4;
+  --color-text-muted:        #7A7390;
+  --color-border:            #2A2440;
+
+  /* Spacing scale (supplements Tailwind defaults) */
+  --space-section: 5rem;
+
+  /* Border radius */
+  --radius-card: 0.75rem;
+  --radius-sm:   0.375rem;
+}
+
+/* ── Base Reset ──────────────────────────────────────────────── */
+@layer base {
+  html {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    min-height: 100dvh;
+  }
+
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
+  }
+
+  /* Reduce motion for those who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Utilities ───────────────────────────────────────────────── */
+@layer components {
+  /* Reusable focus ring in brand colour */
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base;
+  }
+}
+
+/* ── Celestial motion ─────────────────────────────────────────── */
+
+/* Layer A: Ken Burns ambient image */
+.ma-layer-a {
+  position: absolute; inset: -3%; width: 106%; height: 106%;
+  object-fit: cover; object-position: center 46%;
+  opacity: .58;
+  animation: ma-drift 38s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Layer B: Star twinkle overlay */
+.ma-layer-b { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+/* Hero: radial gradient only over the left text area */
+.ma-hero-text-veil {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(13,11,20,.42) 0%, rgba(13,11,20,.22) 42%, rgba(13,11,20,0) 75%);
+}
+
+/* Hero: bottom section fade (last ~25% height) */
+.ma-hero-bottom-fade {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 28%;
+  background: linear-gradient(to top, #0D0B14 0%, rgba(13,11,20,.62) 48%, transparent 100%);
+}
+
+/* Orbit rings */
+.ma-orbit { transform-origin: 50% 50%; animation: ma-orbit 100s linear infinite; }
+.ma-orbit--reverse { animation-direction: reverse; }
+
+/* Gold glow pulse (Layer C, 9 s) */
+.ma-glow { animation: ma-glow 9s ease-in-out infinite; }
+
+/* Star twinkle (Layer B) */
+.ma-starfield { animation: ma-twinkle 9s ease-in-out infinite alternate; }
+
+/* Content entrance */
+.ma-reveal { animation: ma-reveal .9s cubic-bezier(.2,.7,.2,1) both; }
+.ma-reveal--delay-1 { animation-delay: .14s; }
+.ma-reveal--delay-2 { animation-delay: .28s; }
+.ma-reveal--delay-3 { animation-delay: .42s; }
+
+/* Scroll-reveal: JS adds reveal-ready, then reveal-visible on intersection */
+[data-reveal] { transition: opacity .65s ease, transform .65s ease; }
+[data-reveal].reveal-ready { opacity: 0; transform: translateY(22px); }
+[data-reveal].reveal-visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+/* Topic / feature cards */
+.ma-card {
+  background: rgba(48,28,72,.28);
+  border: 1px solid rgba(201,168,76,.22);
+  border-radius: var(--radius-sm);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+.ma-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201,168,76,.50);
+  box-shadow: 0 8px 28px rgba(201,168,76,.10);
+}
+
+@keyframes ma-drift {
+  from { transform: scale(1)    translate3d(-.4%,  0,    0); }
+  to   { transform: scale(1.04) translate3d( .4%, -.6%,  0); }
+}
+@keyframes ma-orbit { to { transform: rotate(360deg); } }
+@keyframes ma-glow {
+  0%, 100% { opacity: .68; filter: drop-shadow(0 0 5px rgba(201,168,76,.18)); }
+  50%      { opacity: 1;   filter: drop-shadow(0 0 20px rgba(201,168,76,.44)); }
+}
+@keyframes ma-twinkle { 0% { opacity: .38; } 100% { opacity: .80; } }
+@keyframes ma-reveal  { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ma-layer-a, .ma-orbit, .ma-glow, .ma-starfield, .ma-reveal {
+    animation: none !important; transform: none !important; transition: none !important;
+  }
+  [data-reveal].reveal-ready { opacity: 1 !important; transform: none !important; }
+}
