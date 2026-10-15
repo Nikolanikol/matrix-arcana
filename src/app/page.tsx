@@ -58,6 +58,16 @@ export default function HomePage() {
           className="pointer-events-none absolute right-4 top-4 z-[6] w-16 rotate-90 opacity-50 sm:w-20"
         />
 
+        {/* A small hanging talisman adds object detail without competing with the orrery. */}
+        <Image
+          src="/svg/star-charm.svg"
+          alt=""
+          aria-hidden="true"
+          width={120}
+          height={160}
+          className="ma-hero__charm pointer-events-none absolute right-[14%] top-[12%] z-[6] hidden w-16 lg:block xl:w-[4.5rem]"
+        />
+
         <PageContainer width="wide" className="relative z-10 flex w-full items-center py-16 sm:py-20 lg:py-0">
           <div className="ma-hero__copy">
             <h1
