@@ -346,6 +346,17 @@
   50% { opacity: .29; }
 }
 
+.ma-hero__charm {
+  transform-origin: 50% 0%;
+  filter: drop-shadow(0 0 10px rgba(201, 168, 76, .28));
+  animation: ma-charm-sway 6.6s ease-in-out infinite alternate;
+}
+
+@keyframes ma-charm-sway {
+  from { transform: translateY(0) rotate(-4deg); }
+  to { transform: translateY(8px) rotate(4deg); }
+}
+
 @media (max-width: 1023px) {
   .ma-hero {
     min-height: calc(100svh - 4rem);
@@ -392,5 +403,9 @@
     animation: none !important;
     transform: none !important;
     will-change: auto !important;
+  }
+  .ma-hero__charm {
+    animation: none !important;
+    transform: none !important;
   }
 }
