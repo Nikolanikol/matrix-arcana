@@ -80,13 +80,50 @@
   will-change: transform;
 }
 
-/* Layer B: Stars — positioned above main scene, parallax drift */
-.ma-layer-stars {
-  position: absolute; inset: -2%; width: 104%; height: 104%;
-  object-fit: cover; object-position: center;
-  opacity: .72;
-  animation: ma-star-parallax 58s ease-in-out infinite alternate;
+/* Visible starfield: two independent tiled layers with deliberately readable drift.
+   The stars are generated with CSS so movement is not hidden inside a static WebP. */
+.ma-starfield {
+  overflow: hidden;
+  mix-blend-mode: screen;
+  isolation: isolate;
+}
+
+.ma-starfield::before,
+.ma-starfield::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  display: block;
+  background-repeat: repeat;
+  pointer-events: none;
   will-change: transform, opacity;
+}
+
+.ma-starfield::before {
+  background-image:
+    radial-gradient(1.4px 1.4px at 22px 30px, rgba(240,236,228,.95) 98%, transparent),
+    radial-gradient(1.8px 1.8px at 116px 92px, rgba(201,168,76,.9) 98%, transparent),
+    radial-gradient(1px 1px at 74px 166px, rgba(240,236,228,.72) 98%, transparent),
+    radial-gradient(1.3px 1.3px at 204px 138px, rgba(124,92,191,.9) 98%, transparent);
+  background-size: 260px 220px, 340px 290px, 210px 270px, 390px 320px;
+  background-position: 0 0, 54px 120px, 82px 42px, 140px 188px;
+  opacity: .82;
+  animation:
+    ma-stars-drift-near 26s linear infinite alternate,
+    ma-stars-twinkle-near 4.8s ease-in-out infinite alternate;
+}
+
+.ma-starfield::after {
+  background-image:
+    radial-gradient(1px 1px at 48px 58px, rgba(240,236,228,.72) 98%, transparent),
+    radial-gradient(1.2px 1.2px at 174px 128px, rgba(201,168,76,.72) 98%, transparent),
+    radial-gradient(.9px .9px at 112px 224px, rgba(240,236,228,.58) 98%, transparent);
+  background-size: 310px 280px, 430px 360px, 250px 330px;
+  background-position: 22px 72px, 180px 20px, 92px 154px;
+  opacity: .56;
+  animation:
+    ma-stars-drift-far 39s ease-in-out infinite alternate,
+    ma-stars-twinkle-far 7s ease-in-out infinite alternate;
 }
 
 /* Hero: radial gradient only over the left text area */
@@ -142,10 +179,22 @@
   from { transform: scale(1)    translate3d(  0,    0,   0); }
   to   { transform: scale(1.04) translate3d(-.3%, -.4%,  0); }
 }
-/* Star parallax — moves in opposite direction to hero for depth illusion */
-@keyframes ma-star-parallax {
-  from { transform: scale(1.03) translate3d(   0,    0, 0); opacity: .62; }
-  to   { transform: scale(1.03) translate3d(1.6%, .55%, 0); opacity: .80; }
+/* Near stars travel far enough to be perceptible within a few seconds. */
+@keyframes ma-stars-drift-near {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-8%, 5%, 0); }
+}
+@keyframes ma-stars-drift-far {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(6%, -4%, 0); }
+}
+@keyframes ma-stars-twinkle-near {
+  from { opacity: .58; }
+  to   { opacity: .94; }
+}
+@keyframes ma-stars-twinkle-far {
+  from { opacity: .38; }
+  to   { opacity: .68; }
 }
 @keyframes ma-orbit { to { transform: rotate(360deg); } }
 @keyframes ma-glow {
@@ -155,8 +204,9 @@
 @keyframes ma-reveal  { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .ma-layer-a, .ma-hero-main, .ma-layer-stars,
-  .ma-orbit, .ma-glow, .ma-reveal {
+  .ma-layer-a, .ma-hero-main,
+  .ma-orbit, .ma-glow, .ma-reveal,
+  .ma-starfield::before, .ma-starfield::after {
     animation: none !important; transform: none !important; transition: none !important;
   }
   [data-reveal].reveal-ready { opacity: 1 !important; transform: none !important; }
