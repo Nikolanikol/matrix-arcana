@@ -161,7 +161,7 @@ export default function HomePage() {
         <div className="ma-topics-section__haze pointer-events-none absolute inset-0" aria-hidden="true" />
         <PageContainer width="wide" className="relative z-10">
           <div className="ma-topics-heading" data-reveal>
-            <p className="ma-section-eyebrow">{about.label}</p>
+            <p className="ma-section-eyebrow">{topics.label}</p>
             <h2
               id="topics-heading"
               className="ma-section-heading font-heading"
@@ -218,7 +218,7 @@ export default function HomePage() {
         <PageContainer width="wide" className="relative z-10">
           <div className="ma-final-cta__panel" data-reveal>
             <div className="ma-final-cta__copy">
-              <p className="ma-section-eyebrow">{about.label}</p>
+              <p className="ma-section-eyebrow">{cta.label}</p>
               <h2 id="final-cta-heading" className="ma-section-heading font-heading">
                 {cta.title}
               </h2>
