@@ -212,3 +212,185 @@
   }
   [data-reveal].reveal-ready { opacity: 1 !important; transform: none !important; }
 }
+
+
+/* ── Object-led Hero composition ───────────────────────────────── */
+/* The nebula image remains visible; gradients add local contrast, not a black veil. */
+.ma-hero {
+  position: relative;
+  isolation: isolate;
+  background: #0D0B14;
+}
+
+.ma-hero__base {
+  background:
+    radial-gradient(ellipse at 76% 38%, rgba(124, 92, 191, .16) 0%, rgba(124, 92, 191, 0) 48%),
+    radial-gradient(ellipse at 64% 78%, rgba(201, 168, 76, .075) 0%, rgba(201, 168, 76, 0) 38%),
+    linear-gradient(90deg, rgba(13, 11, 20, .22) 0%, rgba(13, 11, 20, .08) 48%, rgba(13, 11, 20, .02) 72%, rgba(13, 11, 20, .12) 100%);
+}
+
+.ma-hero__ambient {
+  position: absolute;
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  object-position: 61% 46%;
+  opacity: .82;
+  filter: saturate(1.06) contrast(1.02);
+  animation: ma-ambient-scene 46s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.ma-hero__copy {
+  position: relative;
+  width: min(100%, 590px);
+  max-width: 590px;
+  padding-block: 2rem;
+}
+
+.ma-hero__orrery {
+  top: 50%;
+  right: clamp(-1.5rem, 1.3vw, 1.5rem);
+  width: clamp(31rem, 50vw, 47rem);
+  transform: translateY(-50%);
+  opacity: .98;
+  filter: drop-shadow(0 28px 46px rgba(0, 0, 0, .32));
+}
+
+.ma-orrery-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation: ma-orrery-float 8.5s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+.ma-orrery-ring--outer {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: ma-orrery-outer-turn 48s linear infinite;
+}
+
+.ma-orrery-ring--inner {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: ma-orrery-inner-turn 37s linear infinite;
+}
+
+.ma-orrery-ring--vertical {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: ma-orrery-vertical-sway 24s ease-in-out infinite alternate;
+}
+
+.ma-orrery-pendant {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: ma-orrery-pendant-sway 5.8s ease-in-out infinite alternate;
+}
+
+.ma-orrery-core-glow {
+  animation: ma-orrery-core-pulse 7.5s ease-in-out infinite;
+}
+
+.ma-hero__text-veil {
+  background:
+    radial-gradient(ellipse 58% 66% at 20% 48%, rgba(13, 11, 20, .44) 0%, rgba(13, 11, 20, .30) 34%, rgba(13, 11, 20, .12) 58%, rgba(13, 11, 20, 0) 78%);
+}
+
+.ma-hero-bottom-fade {
+  height: 16%;
+  background: linear-gradient(
+    to top,
+    #0D0B14 0%,
+    rgba(13, 11, 20, .68) 24%,
+    rgba(13, 11, 20, .26) 58%,
+    rgba(13, 11, 20, 0) 100%
+  );
+}
+
+@keyframes ma-ambient-scene {
+  from { transform: scale(1.015) translate3d(0, 0, 0); }
+  to   { transform: scale(1.07) translate3d(-.8%, -.45%, 0); }
+}
+
+@keyframes ma-orrery-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -9px, 0); }
+}
+
+@keyframes ma-orrery-outer-turn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ma-orrery-inner-turn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes ma-orrery-vertical-sway {
+  from { transform: rotate(-3deg); }
+  to { transform: rotate(3deg); }
+}
+
+@keyframes ma-orrery-pendant-sway {
+  from { transform: rotate(-3.5deg); }
+  to { transform: rotate(3.5deg); }
+}
+
+@keyframes ma-orrery-core-pulse {
+  0%, 100% { opacity: .11; }
+  50% { opacity: .29; }
+}
+
+@media (max-width: 1023px) {
+  .ma-hero {
+    min-height: calc(100svh - 4rem);
+  }
+
+  .ma-hero__ambient {
+    object-position: 65% 42%;
+    opacity: .73;
+  }
+
+  .ma-hero__orrery {
+    top: 1.4rem;
+    right: -10vw;
+    width: min(88vw, 430px);
+    transform: none;
+    opacity: .72;
+    filter: drop-shadow(0 18px 34px rgba(0, 0, 0, .30));
+  }
+
+  .ma-hero__copy {
+    max-width: 100%;
+    padding-block: 1rem;
+  }
+
+  .ma-hero__text-veil {
+    background:
+      linear-gradient(to bottom, rgba(13, 11, 20, 0) 24%, rgba(13, 11, 20, .16) 44%, rgba(13, 11, 20, .62) 74%, rgba(13, 11, 20, .78) 100%),
+      radial-gradient(ellipse 92% 44% at 28% 82%, rgba(13, 11, 20, .5) 0%, rgba(13, 11, 20, 0) 100%);
+  }
+
+  .ma-hero-bottom-fade {
+    height: 13%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ma-hero__ambient,
+  .ma-orrery-svg,
+  .ma-orrery-ring--outer,
+  .ma-orrery-ring--inner,
+  .ma-orrery-ring--vertical,
+  .ma-orrery-pendant,
+  .ma-orrery-core-glow {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
