@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { t } from '@/i18n/t'
 import { PageContainer } from '@/shared/ui/PageContainer'
+import { CelestialOrrery } from '@/shared/ui/CelestialOrrery'
 
 export default function HomePage() {
   const { landing } = t()
@@ -10,117 +11,71 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────── */}
+      {/* ── Hero: atmospheric scene + object-based celestial orrery ── */}
       <section
         aria-labelledby="hero-heading"
-        className="isolate relative flex items-end lg:items-center min-h-[100dvh] overflow-hidden"
+        className="ma-hero isolate relative flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden"
       >
-        {/* Layer A: Atmospheric ambient — behind main scene */}
+        <div className="ma-hero__base absolute inset-0" aria-hidden="true" />
+
+        {/* Use the existing nebula as an atmosphere, not a flat image card. */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/backgrounds/cosmos-ambient.webp" alt="" className="ma-layer-a" />
-        </div>
-
-        {/* Layer 1a: Desktop hero cosmic art — full opacity, Ken Burns */}
-        <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
           <Image
-            src="/images/hero/hero-cosmic-main.webp"
+            src="/images/backgrounds/cosmos-ambient.webp"
             alt=""
             fill
-            className="ma-hero-main object-cover object-[62%_38%]"
-            sizes="100vw"
             priority
-          />
-        </div>
-
-        {/* Layer 1b: Mobile hero cosmic art */}
-        <div className="pointer-events-none absolute inset-0 lg:hidden" aria-hidden="true">
-          <Image
-            src="/images/hero/hero-cosmic-mobile.webp"
-            alt=""
-            fill
-            className="ma-hero-main object-cover object-[50%_22%] opacity-90"
             sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-bg-base/20 via-transparent to-transparent" />
-        </div>
-
-        {/* Layer 2: Two independent CSS star planes, animated above the cosmic artwork */}
-        <div className="ma-starfield pointer-events-none absolute inset-0" aria-hidden="true" />
-
-        {/* Layer 3: Text veil — radial gradient under text area only */}
-        <div className="pointer-events-none absolute inset-0 ma-hero-text-veil" aria-hidden="true" />
-
-        {/* Bottom fade — both breakpoints */}
-        <div className="ma-hero-bottom-fade pointer-events-none" aria-hidden="true" />
-
-        {/* Layer C: Gold glow accent (desktop) */}
-        <div
-          className="pointer-events-none absolute hidden lg:block"
-          style={{ right: '17vw', top: '27%' }}
-          aria-hidden="true"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/graphics/starburst.svg" alt="" className="ma-glow w-10 opacity-55" />
-        </div>
-
-        {/* Layer D: Sacred orbit rings (desktop) — 55s per spec */}
-        <div
-          className="pointer-events-none absolute hidden -translate-y-1/2 lg:block"
-          style={{ right: '3vw', top: '50%' }}
-          aria-hidden="true"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/graphics/sacred-orbit.svg"
-            alt=""
-            className="ma-orbit opacity-[0.32] w-[28rem] xl:w-[34rem]"
-            style={{ animationDuration: '55s' }}
+            className="ma-hero__ambient"
           />
         </div>
 
-        {/* Corner ornaments */}
+        {/* Two independently animated star planes are generated in CSS. */}
+        <div className="ma-starfield pointer-events-none absolute inset-0 z-[2]" aria-hidden="true" />
+
+        {/* Main foreground object — each orbital rail moves independently. */}
+        <div className="ma-hero__orrery pointer-events-none absolute z-[3]" aria-hidden="true">
+          <CelestialOrrery />
+        </div>
+
+        {/* Local text contrast only; this veil does not black out the scene. */}
+        <div className="ma-hero__text-veil pointer-events-none absolute inset-0 z-[4]" aria-hidden="true" />
+        <div className="ma-hero-bottom-fade pointer-events-none absolute inset-x-0 bottom-0 z-[5]" aria-hidden="true" />
+
+        {/* Corner ornaments remain secondary to the object. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/graphics/corner-top-left.svg"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-4 top-4 w-16 opacity-50 sm:w-20"
+          className="pointer-events-none absolute left-4 top-4 z-[6] w-16 opacity-50 sm:w-20"
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/graphics/corner-top-right.svg"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute right-4 top-4 w-16 rotate-90 opacity-50 sm:w-20"
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/graphics/corner-bottom-left.svg"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-4 left-4 w-12 -rotate-90 opacity-30 sm:w-16"
+          className="pointer-events-none absolute right-4 top-4 z-[6] w-16 rotate-90 opacity-50 sm:w-20"
         />
 
-        {/* Content */}
-        <PageContainer className="relative z-10 pb-16 pt-32 lg:py-0" width="wide">
-          <div className="max-w-xl lg:max-w-2xl">
+        <PageContainer width="wide" className="relative z-10 flex w-full items-center py-16 sm:py-20 lg:py-0">
+          <div className="ma-hero__copy">
             <h1
               id="hero-heading"
-              className="ma-reveal font-heading text-5xl font-light leading-tight tracking-wide text-ink-primary sm:text-6xl xl:text-7xl"
+              className="ma-reveal font-heading text-5xl font-light leading-[1.02] tracking-wide text-ink-primary sm:text-6xl xl:text-7xl"
             >
               {hero.title}
             </h1>
-            <p className="ma-reveal ma-reveal--delay-1 mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
+            <p className="ma-reveal ma-reveal--delay-1 mt-6 max-w-xl text-base leading-relaxed text-ink-primary/85 sm:text-lg">
               {hero.subtitle}
             </p>
-            <div className="mt-10">
+            <div className="mt-9 sm:mt-10">
               <Link
                 href="/matrix"
-                className="ma-reveal ma-reveal--delay-2 focus-ring inline-block rounded-sm border border-accent-gold px-8 py-3 font-accent text-sm tracking-widest text-accent-gold transition-all hover:bg-accent-gold hover:text-bg-base hover:shadow-[0_0_20px_rgba(201,168,76,0.32)]"
+                className="ma-reveal ma-reveal--delay-2 focus-ring inline-flex min-h-12 items-center gap-3 rounded-sm border border-accent-gold bg-bg-base/25 px-7 py-3 font-accent text-sm tracking-widest text-accent-gold backdrop-blur-sm transition-all duration-300 hover:bg-accent-gold hover:text-bg-base hover:shadow-[0_0_26px_rgba(201,168,76,0.32)]"
               >
-                {hero.cta.toUpperCase()}
+                <span>{hero.cta.toUpperCase()}</span>
+                <span aria-hidden="true" className="text-lg leading-none">↗</span>
               </Link>
             </div>
           </div>
