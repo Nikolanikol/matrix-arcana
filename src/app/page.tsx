@@ -46,15 +46,8 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-bg-base/20 via-transparent to-transparent" />
         </div>
 
-        {/* Layer 2: Stars — above main scene, mix-blend-mode screen for additive brightness */}
-        <div
-          className="pointer-events-none absolute inset-0 overflow-hidden"
-          style={{ mixBlendMode: 'screen' }}
-          aria-hidden="true"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/backgrounds/bg-stars.webp" alt="" className="ma-layer-stars" />
-        </div>
+        {/* Layer 2: Two independent CSS star planes, animated above the cosmic artwork */}
+        <div className="ma-starfield pointer-events-none absolute inset-0" aria-hidden="true" />
 
         {/* Layer 3: Text veil — radial gradient under text area only */}
         <div className="pointer-events-none absolute inset-0 ma-hero-text-veil" aria-hidden="true" />
