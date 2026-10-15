@@ -84,8 +84,9 @@
    The stars are generated with CSS so movement is not hidden inside a static WebP. */
 .ma-starfield {
   overflow: hidden;
+  /* Blend the star planes against the hero artwork; the Hero section itself
+     provides the stacking-context boundary for these decorative layers. */
   mix-blend-mode: screen;
-  isolation: isolate;
 }
 
 .ma-starfield::before,
