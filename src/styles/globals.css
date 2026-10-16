@@ -1201,7 +1201,7 @@
   .ma-topic-card { min-height:335px; padding:1.05rem .8rem 1.2rem; }
   .ma-topic-card__art { min-height:155px; }
   .ma-topic-card__art-image { width:min(100%,112px); max-height:128px; }
-  .ma-final-cta__haze { background:linear-gradient(180deg,rgba(13,11,20,.72),rgba(13,11,20,.42) 38%,rgba(13,11,20,.83)),url('/images/hero/hero-cosmic-mobile.webp') center top/cover no-repeat; }
+  .ma-final-cta__haze { background:linear-gradient(180deg,rgba(13,11,20,.72),rgba(13,11,20,.42) 38%,rgba(13,11,20,.83)),url('/images/hero/hero-cosmic-main.webp') center top/cover no-repeat; }
   .ma-final-cta__seal { min-height:240px; }
   .ma-final-cta__seal-image { width:min(100%,270px); }
 }
