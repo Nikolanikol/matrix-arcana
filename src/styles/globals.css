@@ -1013,3 +1013,11 @@
     transform: none;
   }
 }
+
+
+/* Dedicated portrait crop: keeps the celestial mechanism visible above the copy. */
+.ma-hero__ambient--mobile {
+  object-position: center 42%;
+  opacity: .84;
+  animation-duration: 38s;
+}
