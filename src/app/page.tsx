@@ -20,7 +20,7 @@ export default function HomePage() {
         {/* Use the existing nebula as an atmosphere, not a flat image card. */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
-            src="/images/hero/hero-cosmic-main.webp"
+            src="/images/hero/hero-main.webp"
             alt=""
             fill
             priority
