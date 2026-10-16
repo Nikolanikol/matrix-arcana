@@ -1091,7 +1091,7 @@
 .ma-hero__text-veil { background:radial-gradient(ellipse 56% 70% at 20% 49%,rgba(13,11,20,.29) 0%,rgba(13,11,20,.18) 40%,rgba(13,11,20,.04) 65%,transparent 82%); }
 .ma-hero__copy { max-width:590px; padding-block:2.5rem; }
 .ma-hero__orrery {
-  top:49%; right:clamp(1.2rem,5vw,5.5rem); width:clamp(22rem,39vw,36rem);
+  top:49%; right:clamp(1.2rem,5vw,5.5rem); width:clamp(20rem,34vw,31rem);
   transform:translateY(-50%); display:grid; place-items:center; opacity:.99;
   filter:drop-shadow(0 30px 42px rgba(0,0,0,.42));
 }
@@ -1151,7 +1151,7 @@
 .ma-topic-card::after { background:radial-gradient(circle,rgba(124,92,191,.2),rgba(201,168,76,.05) 43%,transparent 70%); }
 .ma-topic-card__art { min-height:220px; margin-top:.35rem; overflow:hidden; isolation:isolate; }
 .ma-topic-card__art-scene {
-  position:absolute; inset:0; z-index:-1; display:block;
+  position:absolute; inset:0; z-index:0; display:block;
   background-image:url('/images/hero/hero-cosmic-main.webp'); background-repeat:no-repeat; background-size:500% auto;
   opacity:.84; transform:scale(1.02); filter:saturate(1.08) contrast(1.06);
   transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .6s ease,opacity .5s ease;
@@ -1162,9 +1162,9 @@
 .ma-topic-card__art-scene--talents { background-position:25% 50%; }
 .ma-topic-card__art-scene--relationships { background-position:100% 50%; }
 .ma-topic-card__art-scene--finance { background-position:75% 46%; }
-.ma-topic-card__art-halo { width:83%; background:radial-gradient(circle,rgba(124,92,191,.24),rgba(201,168,76,.08) 42%,transparent 72%); filter:blur(7px); opacity:.86; }
+.ma-topic-card__art-halo { z-index:1; width:83%; background:radial-gradient(circle,rgba(124,92,191,.24),rgba(201,168,76,.08) 42%,transparent 72%); filter:blur(7px); opacity:.86; }
 .ma-topic-card__art-image {
-  width:min(100%,140px); max-height:150px;
+  z-index:2; width:min(100%,140px); max-height:150px;
   filter:drop-shadow(0 9px 16px rgba(0,0,0,.45)) drop-shadow(0 0 10px rgba(201,168,76,.12)); opacity:.86;
   transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .45s ease,opacity .4s ease;
 }
@@ -1217,6 +1217,7 @@
 @keyframes ma-stars-drift-near { from { transform:translate3d(0,0,0); } to { transform:translate3d(-13%,7%,0); } }
 @keyframes ma-stars-drift-far { from { transform:translate3d(0,0,0); } to { transform:translate3d(8%,-5%,0); } }
 @media (prefers-reduced-motion:reduce) {
+  .ma-topic-card,.ma-topic-card:hover { transition:none !important; transform:none !important; }
   .ma-hero__ambient,.ma-hero__object,.ma-hero__object-aura,.ma-hero__charm,
   .ma-starfield::before,.ma-starfield::after,.ma-section-divider__star,.ma-section-divider__emblem,
   .ma-method-visual__halo,.ma-method-visual__orbit--one,.ma-method-visual__orbit--two,.ma-method-visual__art,
