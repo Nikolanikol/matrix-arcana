@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { t } from '@/i18n/t'
 import { PageContainer } from '@/shared/ui/PageContainer'
+import { CelestialOrrery } from '@/shared/ui/CelestialOrrery'
 
 export default function HomePage() {
   const { landing } = t()
@@ -10,284 +11,239 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────── */}
+      {/* ── Hero: atmospheric scene + object-based celestial orrery ── */}
       <section
         aria-labelledby="hero-heading"
-        className="isolate relative flex items-end lg:items-center min-h-[100dvh] overflow-hidden"
+        className="ma-hero isolate relative flex min-h-[calc(100dvh-4rem)] items-end overflow-hidden lg:items-center"
       >
-        {/* Layer A: Atmospheric ambient — behind main scene */}
+        <div className="ma-hero__base absolute inset-0" aria-hidden="true" />
+
+        {/* Use the existing nebula as an atmosphere, not a flat image card. */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/backgrounds/cosmos-ambient.webp" alt="" className="ma-layer-a" />
-        </div>
-
-        {/* Layer 1a: Desktop hero cosmic art — full opacity, Ken Burns */}
-        <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
           <Image
-            src="/images/hero/hero-cosmic-main.webp"
+            src="/images/backgrounds/bg-nebula.webp"
             alt=""
             fill
-            className="ma-hero-main object-cover object-[62%_38%]"
-            sizes="100vw"
             priority
-          />
-        </div>
-
-        {/* Layer 1b: Mobile hero cosmic art */}
-        <div className="pointer-events-none absolute inset-0 lg:hidden" aria-hidden="true">
-          <Image
-            src="/images/hero/hero-cosmic-mobile.webp"
-            alt=""
-            fill
-            className="ma-hero-main object-cover object-[50%_22%] opacity-90"
             sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-bg-base/20 via-transparent to-transparent" />
-        </div>
-
-        {/* Layer 2: Two independent CSS star planes, animated above the cosmic artwork */}
-        <div className="ma-starfield pointer-events-none absolute inset-0" aria-hidden="true" />
-
-        {/* Layer 3: Text veil — radial gradient under text area only */}
-        <div className="pointer-events-none absolute inset-0 ma-hero-text-veil" aria-hidden="true" />
-
-        {/* Bottom fade — both breakpoints */}
-        <div className="ma-hero-bottom-fade pointer-events-none" aria-hidden="true" />
-
-        {/* Layer C: Gold glow accent (desktop) */}
-        <div
-          className="pointer-events-none absolute hidden lg:block"
-          style={{ right: '17vw', top: '27%' }}
-          aria-hidden="true"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/graphics/starburst.svg" alt="" className="ma-glow w-10 opacity-55" />
-        </div>
-
-        {/* Layer D: Sacred orbit rings (desktop) — 55s per spec */}
-        <div
-          className="pointer-events-none absolute hidden -translate-y-1/2 lg:block"
-          style={{ right: '3vw', top: '50%' }}
-          aria-hidden="true"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/graphics/sacred-orbit.svg"
-            alt=""
-            className="ma-orbit opacity-[0.32] w-[28rem] xl:w-[34rem]"
-            style={{ animationDuration: '55s' }}
+            className="ma-hero__ambient"
           />
         </div>
 
-        {/* Corner ornaments */}
+        {/* Two independently animated star planes are generated in CSS. */}
+        <div className="ma-starfield pointer-events-none absolute inset-0 z-[2]" aria-hidden="true" />
+
+        {/* Main foreground object — each orbital rail moves independently. */}
+        <div className="ma-hero__orrery pointer-events-none absolute z-[3]" aria-hidden="true">
+          <CelestialOrrery />
+        </div>
+
+        {/* Local text contrast only; this veil does not black out the scene. */}
+        <div className="ma-hero__text-veil pointer-events-none absolute inset-0 z-[4]" aria-hidden="true" />
+        <div className="ma-hero-bottom-fade pointer-events-none absolute inset-x-0 bottom-0 z-[5]" aria-hidden="true" />
+
+        {/* Corner ornaments remain secondary to the object. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/graphics/corner-top-left.svg"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-4 top-4 w-16 opacity-50 sm:w-20"
+          className="pointer-events-none absolute left-4 top-4 z-[6] w-16 opacity-50 sm:w-20"
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/graphics/corner-top-right.svg"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute right-4 top-4 w-16 rotate-90 opacity-50 sm:w-20"
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/graphics/corner-bottom-left.svg"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-4 left-4 w-12 -rotate-90 opacity-30 sm:w-16"
+          className="pointer-events-none absolute right-4 top-4 z-[6] w-16 rotate-90 opacity-50 sm:w-20"
         />
 
-        {/* Content */}
-        <PageContainer className="relative z-10 pb-16 pt-32 lg:py-0" width="wide">
-          <div className="max-w-xl lg:max-w-2xl">
+        {/* A small hanging talisman adds object detail without competing with the orrery. */}
+        <Image
+          src="/svg/star-charm.svg"
+          alt=""
+          aria-hidden="true"
+          width={120}
+          height={160}
+          className="ma-hero__charm pointer-events-none absolute right-[14%] top-[12%] z-[6] hidden w-16 lg:block xl:w-[4.5rem]"
+        />
+
+        <PageContainer width="wide" className="relative z-10 flex w-full items-center py-16 sm:py-20 lg:py-0">
+          <div className="ma-hero__copy">
             <h1
               id="hero-heading"
-              className="ma-reveal font-heading text-5xl font-light leading-tight tracking-wide text-ink-primary sm:text-6xl xl:text-7xl"
+              className="ma-reveal font-heading text-5xl font-light leading-[1.02] tracking-wide text-ink-primary sm:text-6xl xl:text-7xl"
             >
               {hero.title}
             </h1>
-            <p className="ma-reveal ma-reveal--delay-1 mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
+            <p className="ma-reveal ma-reveal--delay-1 mt-6 max-w-xl text-base leading-relaxed text-ink-primary/85 sm:text-lg">
               {hero.subtitle}
             </p>
-            <div className="mt-10">
+            <div className="mt-9 sm:mt-10">
               <Link
                 href="/matrix"
-                className="ma-reveal ma-reveal--delay-2 focus-ring inline-block rounded-sm border border-accent-gold px-8 py-3 font-accent text-sm tracking-widest text-accent-gold transition-all hover:bg-accent-gold hover:text-bg-base hover:shadow-[0_0_20px_rgba(201,168,76,0.32)]"
+                className="ma-reveal ma-reveal--delay-2 focus-ring inline-flex min-h-12 items-center gap-3 rounded-sm border border-accent-gold bg-bg-base/25 px-7 py-3 font-accent text-sm tracking-widest text-accent-gold backdrop-blur-sm transition-all duration-300 hover:bg-accent-gold hover:text-bg-base hover:shadow-[0_0_26px_rgba(201,168,76,0.32)]"
               >
-                {hero.cta.toUpperCase()}
+                <span>{hero.cta.toUpperCase()}</span>
+                <span aria-hidden="true" className="text-lg leading-none">↗</span>
               </Link>
             </div>
           </div>
         </PageContainer>
       </section>
 
-      {/* ── Celestial Divider ────────────────────────────────────── */}
-      <div className="py-4" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/graphics/divider-celestial.svg"
-          alt=""
-          className="pointer-events-none mx-auto w-full max-w-3xl opacity-40"
-        />
+      {/* ── Transition ornament ─────────────────────────────────── */}
+      <div className="ma-section-divider" aria-hidden="true">
+        <span className="ma-section-divider__line" />
+        <span className="ma-section-divider__sigil">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/graphics/star-spark.svg" alt="" className="ma-section-divider__star" />
+        </span>
+        <span className="ma-section-divider__line" />
       </div>
 
       {/* ── About Method ─────────────────────────────────────────── */}
-      <section aria-labelledby="about-heading" className="py-24">
-        <PageContainer width="wide">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Animated decoration — right side on desktop */}
-            <div className="flex items-center justify-center lg:order-last" aria-hidden="true">
-              <div className="relative h-80 w-80 sm:h-96 sm:w-96 lg:h-[28rem] lg:w-[28rem]">
-                {/* Outer ring — slow orbit */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/graphics/sacred-geometry.svg"
-                  alt=""
-                  className="ma-orbit pointer-events-none absolute inset-0 h-full w-full opacity-30"
-                  style={{ animationDuration: '120s' }}
-                />
-                {/* Inner ring — reverse orbit */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/graphics/orbit-circles.svg"
-                  alt=""
-                  className="ma-orbit ma-orbit--reverse pointer-events-none absolute inset-0 m-auto h-[62%] w-[62%] opacity-55"
-                  style={{ animationDuration: '75s' }}
-                />
-                {/* Gold sparks */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/graphics/star-spark.svg"
-                  alt=""
-                  className="ma-glow pointer-events-none absolute right-6 top-8 w-7 opacity-70"
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/graphics/star-spark.svg"
-                  alt=""
-                  className="ma-glow pointer-events-none absolute bottom-10 left-10 w-5 opacity-50"
-                  style={{ animationDelay: '3s' }}
-                />
-              </div>
-            </div>
-
-            {/* Text */}
-            <div className="text-center lg:text-left">
-              <p className="mb-4 font-accent text-xs tracking-[0.3em] text-accent-gold/70 uppercase">
-                {about.label}
-              </p>
+      <section aria-labelledby="about-heading" className="ma-method-section relative overflow-hidden">
+        <div className="ma-method-section__haze pointer-events-none absolute inset-0" aria-hidden="true" />
+        <PageContainer width="wide" className="relative z-10">
+          <div className="ma-method-grid">
+            <div className="ma-method-copy" data-reveal>
+              <p className="ma-section-eyebrow">{about.label}</p>
               <h2
                 id="about-heading"
-                className="font-heading text-4xl font-light text-ink-primary sm:text-5xl"
+                className="ma-section-heading font-heading"
               >
                 {about.title}
               </h2>
-              <div className="mx-auto mt-4 h-px w-12 bg-accent-gold/40 lg:mx-0" />
-              <p className="mt-6 text-base leading-loose text-ink-muted sm:text-lg">
+              <div className="ma-method-copy__rule" aria-hidden="true" />
+              <p className="ma-method-copy__description">
                 {about.description}
               </p>
+            </div>
+
+            <div className="ma-method-visual" data-reveal aria-hidden="true">
+              <div className="ma-method-visual__halo" />
+              <div className="ma-method-visual__orbit ma-method-visual__orbit--one" />
+              <div className="ma-method-visual__orbit ma-method-visual__orbit--two" />
+              <Image
+                src="/illustrations/method-orbital-reliquary.svg"
+                alt=""
+                width={720}
+                height={640}
+                className="ma-method-visual__art"
+              />
+              <Image
+                src="/svg/star-charm.svg"
+                alt=""
+                width={120}
+                height={160}
+                className="ma-method-visual__charm"
+              />
+              <span className="ma-method-visual__spark ma-method-visual__spark--one" />
+              <span className="ma-method-visual__spark ma-method-visual__spark--two" />
             </div>
           </div>
         </PageContainer>
       </section>
 
-      {/* ── Divider ──────────────────────────────────────────────── */}
-      <div className="py-4" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/graphics/divider-celestial.svg"
-          alt=""
-          className="pointer-events-none mx-auto w-full max-w-3xl opacity-40"
-        />
+      {/* ── Transition ornament ─────────────────────────────────── */}
+      <div className="ma-section-divider ma-section-divider--wide" aria-hidden="true">
+        <span className="ma-section-divider__line" />
+        <span className="ma-section-divider__sigil ma-section-divider__sigil--large">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/graphics/divider-celestial.svg" alt="" className="ma-section-divider__emblem" />
+        </span>
+        <span className="ma-section-divider__line" />
       </div>
 
-      {/* ── Topics Cards ─────────────────────────────────────────── */}
-      <section aria-labelledby="topics-heading" className="py-24">
-        <PageContainer width="wide">
-          <h2
-            id="topics-heading"
-            className="font-heading mb-3 text-center text-4xl font-light text-ink-primary sm:text-5xl"
-          >
-            {topics.heading}
-          </h2>
-          <div className="mx-auto mt-4 h-px w-16 bg-accent-gold/40" />
+      {/* ── Topic directions ─────────────────────────────────────── */}
+      <section aria-labelledby="topics-heading" className="ma-topics-section relative overflow-hidden">
+        <div className="ma-topics-section__haze pointer-events-none absolute inset-0" aria-hidden="true" />
+        <PageContainer width="wide" className="relative z-10">
+          <div className="ma-topics-heading" data-reveal>
+            <p className="ma-section-eyebrow">{topics.label}</p>
+            <h2
+              id="topics-heading"
+              className="ma-section-heading font-heading"
+            >
+              {topics.heading}
+            </h2>
+            <div className="ma-topics-heading__rule" aria-hidden="true" />
+          </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="ma-topics-grid">
             {(
               [
-                { key: 'purpose',       icon: '/icons/purpose.svg'       },
-                { key: 'talents',       icon: '/icons/talents.svg'       },
-                { key: 'relationships', icon: '/icons/relationships.svg' },
-                { key: 'finance',       icon: '/icons/finance.svg'       },
+                { key: 'purpose', icon: '/illustrations/purpose-compass.svg', number: 'I' },
+                { key: 'talents', icon: '/illustrations/talents-prism.svg', number: 'II' },
+                { key: 'relationships', icon: '/illustrations/relationships-orbs.svg', number: 'III' },
+                { key: 'finance', icon: '/illustrations/finance-solar-medallion.svg', number: 'IV' },
               ] as const
-            ).map(({ key, icon }, i) => (
-              <div
+            ).map(({ key, icon, number }, i) => (
+              <article
                 key={key}
                 data-reveal
-                className="ma-card flex flex-col items-center gap-5 p-7 text-center"
-                style={{ transitionDelay: `${i * 0.08}s` }}
+                className="ma-topic-card"
+                style={{ transitionDelay: `${i * 0.1}s` }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={icon}
-                  alt=""
-                  aria-hidden="true"
-                  className="pointer-events-none w-20 opacity-85"
-                />
-                <div>
-                  <h3 className="font-heading text-xl font-light text-ink-primary">
+                <span className="ma-topic-card__number" aria-hidden="true">{number}</span>
+                <div className="ma-topic-card__art" aria-hidden="true">
+                  <span className="ma-topic-card__art-halo" />
+                  <Image
+                    src={icon}
+                    alt=""
+                    width={320}
+                    height={320}
+                    className="ma-topic-card__art-image"
+                  />
+                </div>
+                <div className="ma-topic-card__body">
+                  <h3 className="ma-topic-card__title font-heading">
                     {topics[key].title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  <p className="ma-topic-card__description">
                     {topics[key].description}
                   </p>
                 </div>
-              </div>
+                <span className="ma-topic-card__footline" aria-hidden="true" />
+              </article>
             ))}
           </div>
         </PageContainer>
       </section>
 
-      {/* ── Divider ──────────────────────────────────────────────── */}
-      <div className="py-4" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/graphics/divider-celestial.svg"
-          alt=""
-          className="pointer-events-none mx-auto w-full max-w-3xl opacity-40"
-        />
-      </div>
-
-      {/* ── Final CTA ────────────────────────────────────────────── */}
-      <section className="py-28">
-        <PageContainer width="narrow">
-          <div className="text-center" data-reveal>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/graphics/starburst.svg"
-              alt=""
-              aria-hidden="true"
-              className="ma-glow pointer-events-none mx-auto mb-6 w-10 opacity-60"
-            />
-            <h2 className="font-heading text-4xl font-light text-ink-primary sm:text-5xl">
-              {cta.title}
-            </h2>
-            <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-ink-muted">
-              {cta.description}
-            </p>
-            <div className="mt-10">
-              <Link
-                href="/matrix"
-                className="focus-ring inline-block rounded-sm border border-accent-gold px-10 py-4 font-accent text-sm tracking-widest text-accent-gold transition-all hover:bg-accent-gold hover:text-bg-base hover:shadow-[0_0_24px_rgba(201,168,76,0.30)]"
-              >
-                {cta.button.toUpperCase()}
-              </Link>
+      {/* ── Closing call to action ───────────────────────────────── */}
+      <section className="ma-final-cta relative overflow-hidden" aria-labelledby="final-cta-heading">
+        <div className="ma-final-cta__haze pointer-events-none absolute inset-0" aria-hidden="true" />
+        <PageContainer width="wide" className="relative z-10">
+          <div className="ma-final-cta__panel" data-reveal>
+            <div className="ma-final-cta__copy">
+              <p className="ma-section-eyebrow">{cta.label}</p>
+              <h2 id="final-cta-heading" className="ma-section-heading font-heading">
+                {cta.title}
+              </h2>
+              <p className="ma-final-cta__description">
+                {cta.description}
+              </p>
+              <div className="mt-9">
+                <Link
+                  href="/matrix"
+                  className="ma-final-cta__button focus-ring inline-flex min-h-12 items-center gap-4 rounded-sm border border-accent-gold px-8 py-3 font-accent text-sm tracking-widest text-accent-gold transition-all duration-300 hover:bg-accent-gold hover:text-bg-base hover:shadow-[0_0_28px_rgba(201,168,76,0.32)]"
+                >
+                  <span>{cta.button.toUpperCase()}</span>
+                  <span aria-hidden="true" className="text-lg">↗</span>
+                </Link>
+              </div>
+            </div>
+            <div className="ma-final-cta__seal" aria-hidden="true">
+              <div className="ma-final-cta__seal-halo" />
+              <Image
+                src="/illustrations/cta-celestial-seal.svg"
+                alt=""
+                width={460}
+                height={460}
+                className="ma-final-cta__seal-image"
+              />
             </div>
           </div>
         </PageContainer>

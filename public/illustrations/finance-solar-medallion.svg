@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" fill="none">
+ <defs><linearGradient id="g" x1="40" y1="38" x2="275" y2="275" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF0B8"/><stop offset=".25" stop-color="#B88335"/><stop offset=".55" stop-color="#E9C971"/><stop offset=".8" stop-color="#865A23"/><stop offset="1" stop-color="#D1A64B"/></linearGradient><radialGradient id="sun" cx="35%" cy="25%" r="75%"><stop stop-color="#FFF1BB"/><stop offset=".35" stop-color="#D69B42"/><stop offset=".72" stop-color="#8A5723"/><stop offset="1" stop-color="#211522"/></radialGradient></defs>
+ <circle cx="160" cy="139" r="70" fill="#C9A84C" fill-opacity=".08"/>
+ <g stroke="url(#g)" stroke-width="2.4" stroke-linecap="round">
+ <path d="M160 24V52M160 226V254M45 139H73M247 139H275M79 58L99 78M221 200L241 220M79 220L99 200M221 78L241 58"/>
+ <path d="M160 40L172 80L212 92L172 104L160 144L148 104L108 92L148 80Z" fill="#C9A84C" fill-opacity=".16"/>
+ <path d="M160 185L171 214L200 225L171 236L160 265L149 236L120 225L149 214Z" fill="#C9A84C" fill-opacity=".08"/>
+ </g>
+ <circle cx="160" cy="139" r="64" fill="#15101D" stroke="url(#g)" stroke-width="4"/>
+ <circle cx="160" cy="139" r="53" fill="url(#sun)" stroke="#F1D78D" stroke-width="1.5"/>
+ <circle cx="160" cy="139" r="37" stroke="#FFE6A1" stroke-opacity=".65" stroke-width="1.6"/>
+ <path d="M160 106V172M139 119H166C184 119 184 139 166 139H153C134 139 134 159 153 159H180" stroke="#FFF0BC" stroke-width="4" stroke-linecap="round"/>
+ <path d="M98 270L120 250H198L220 270V282H98V270Z" fill="#17111D" stroke="url(#g)" stroke-width="2.5"/>
+ <ellipse cx="159" cy="250" rx="46" ry="9" fill="#2A1A20" stroke="url(#g)" stroke-width="2.5"/>
+ <ellipse cx="159" cy="240" rx="38" ry="8" fill="#5A3A21" stroke="#E1BD65" stroke-width="2"/>
+ <ellipse cx="159" cy="229" rx="29" ry="7" fill="#9A6A2A" stroke="#F1D38A" stroke-width="2"/>
+ <circle cx="55" cy="231" r="13" fill="#17111D" stroke="url(#g)" stroke-width="2"/><circle cx="55" cy="231" r="7" fill="url(#sun)"/>
+ <circle cx="267" cy="202" r="10" fill="#17111D" stroke="url(#g)" stroke-width="2"/><circle cx="267" cy="202" r="5" fill="url(#sun)"/>
+ </svg>
