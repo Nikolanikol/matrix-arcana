@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { t } from '@/i18n/t'
 import { PageContainer } from '@/shared/ui/PageContainer'
-import { CelestialOrrery } from '@/shared/ui/CelestialOrrery'
 
 export default function HomePage() {
   const { landing } = t()
@@ -21,7 +20,7 @@ export default function HomePage() {
         {/* Use the existing nebula as an atmosphere, not a flat image card. */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
-            src="/images/backgrounds/bg-nebula.webp"
+            src="/images/hero/hero-cosmic-main.webp"
             alt=""
             fill
             priority
@@ -33,9 +32,16 @@ export default function HomePage() {
         {/* Two independently animated star planes are generated in CSS. */}
         <div className="ma-starfield pointer-events-none absolute inset-0 z-[2]" aria-hidden="true" />
 
-        {/* Main foreground object — each orbital rail moves independently. */}
+        {/* True rendered brass-and-amethyst object: separate from the cinematic background. */}
         <div className="ma-hero__orrery pointer-events-none absolute z-[3]" aria-hidden="true">
-          <CelestialOrrery />
+          <span className="ma-hero__object-aura" />
+          <Image
+            src="/images/objects/orrery-object.webp"
+            alt=""
+            width={300}
+            height={232}
+            className="ma-hero__object"
+          />
         </div>
 
         {/* Local text contrast only; this veil does not black out the scene. */}
@@ -126,10 +132,10 @@ export default function HomePage() {
               <div className="ma-method-visual__orbit ma-method-visual__orbit--one" />
               <div className="ma-method-visual__orbit ma-method-visual__orbit--two" />
               <Image
-                src="/illustrations/method-orbital-reliquary.svg"
+                src="/images/objects/orrery-object.webp"
                 alt=""
-                width={720}
-                height={640}
+                width={300}
+                height={232}
                 className="ma-method-visual__art"
               />
               <Image
