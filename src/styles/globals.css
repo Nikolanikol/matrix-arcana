@@ -1210,3 +1210,78 @@
     will-change: auto !important;
   }
 }
+
+
+/* ── Cinematic surface refinement for the lower page ──────────── */
+.ma-topic-card {
+  min-height: 454px;
+  border-color: rgba(201,168,76,.31);
+  background-image:
+    radial-gradient(ellipse at 50% 20%, rgba(124,92,191,.15), rgba(124,92,191,0) 58%),
+    linear-gradient(155deg, rgba(27,20,37,.82), rgba(13,11,20,.91) 66%, rgba(23,16,31,.86)),
+    url('/images/hero/hero-cosmic-main.webp');
+  background-size: auto, auto, 520% auto;
+  background-repeat: no-repeat;
+  background-blend-mode: normal, normal, screen;
+  box-shadow: inset 0 0 46px rgba(124,92,191,.075), 0 18px 42px rgba(0,0,0,.20);
+}
+.ma-topic-card:nth-child(1) { background-position: center, center, 0% 50%; }
+.ma-topic-card:nth-child(2) { background-position: center, center, 32% 50%; }
+.ma-topic-card:nth-child(3) { background-position: center, center, 66% 50%; }
+.ma-topic-card:nth-child(4) { background-position: center, center, 100% 50%; }
+.ma-topic-card__art {
+  min-height: 218px;
+}
+.ma-topic-card__art-halo {
+  width: 89%;
+  background: radial-gradient(circle, rgba(124,92,191,.25), rgba(201,168,76,.075) 42%, transparent 72%);
+  animation: ma-topic-aura-breathe 7.2s ease-in-out infinite alternate;
+}
+.ma-topic-card__art-image {
+  width: min(100%, 218px);
+  filter: drop-shadow(0 12px 22px rgba(0,0,0,.32)) drop-shadow(0 0 11px rgba(201,168,76,.10));
+}
+.ma-topic-card:hover .ma-topic-card__art-image {
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.28)) drop-shadow(0 0 18px rgba(201,168,76,.22));
+}
+.ma-topic-card__description {
+  color: rgba(240,236,228,.82);
+}
+.ma-final-cta__seal {
+  min-height: 350px;
+}
+.ma-final-cta__seal-halo {
+  width: 104%;
+  background: radial-gradient(circle, rgba(124,92,191,.28), rgba(201,168,76,.09) 45%, transparent 73%);
+}
+.ma-final-cta__seal-image {
+  width: min(100%, 375px);
+  filter: drop-shadow(0 23px 30px rgba(0,0,0,.38)) drop-shadow(0 0 18px rgba(201,168,76,.12));
+  animation: ma-method-reliquary-float 8.2s ease-in-out infinite;
+}
+@keyframes ma-topic-aura-breathe {
+  from { opacity: .5; transform: scale(.93); }
+  to { opacity: 1; transform: scale(1.08); }
+}
+@media (max-width: 1100px) {
+  .ma-topic-card { min-height: 410px; }
+  .ma-topic-card__art { min-height: 195px; }
+  .ma-topic-card__art-image { width: min(100%, 190px); }
+}
+@media (max-width: 760px) {
+  .ma-topic-card {
+    min-height: 355px;
+    background-size: auto, auto, 620% auto;
+  }
+  .ma-topic-card__art { min-height: 164px; }
+  .ma-topic-card__art-image { width: min(100%, 158px); }
+  .ma-final-cta__seal { min-height: unset; }
+  .ma-final-cta__seal-image { width: min(100%, 270px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ma-topic-card__art-halo,
+  .ma-final-cta__seal-image {
+    animation: none !important;
+    transform: none !important;
+  }
+}
