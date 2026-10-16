@@ -20,7 +20,7 @@ export default function HomePage() {
         {/* Use the existing nebula as an atmosphere, not a flat image card. */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
-            src="/images/hero/hero-main.webp"
+            src="/images/hero/hero-cosmic-main.webp"
             alt=""
             fill
             priority
@@ -132,10 +132,10 @@ export default function HomePage() {
               <div className="ma-method-visual__orbit ma-method-visual__orbit--one" />
               <div className="ma-method-visual__orbit ma-method-visual__orbit--two" />
               <Image
-                src="/images/objects/orrery-object.webp"
+                src="/illustrations/method-orbital-reliquary.svg"
                 alt=""
-                width={300}
-                height={232}
+                width={720}
+                height={640}
                 className="ma-method-visual__art"
               />
               <Image
@@ -244,10 +244,10 @@ export default function HomePage() {
             <div className="ma-final-cta__seal" aria-hidden="true">
               <div className="ma-final-cta__seal-halo" />
               <Image
-                src="/images/objects/orrery-object.webp"
+                src="/illustrations/cta-celestial-seal.svg"
                 alt=""
-                width={300}
-                height={232}
+                width={460}
+                height={460}
                 className="ma-final-cta__seal-image"
               />
             </div>
