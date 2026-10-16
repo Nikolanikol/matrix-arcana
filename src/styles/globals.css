@@ -235,9 +235,9 @@
   width: 104%;
   height: 104%;
   object-fit: cover;
-  object-position: 61% 46%;
-  opacity: .82;
-  filter: saturate(1.06) contrast(1.02);
+  object-position: 54% 46%;
+  opacity: 1;
+  filter: saturate(1.08) contrast(1.04);
   animation: ma-ambient-scene 46s ease-in-out infinite alternate;
   will-change: transform;
 }
@@ -249,55 +249,9 @@
   padding-block: 2rem;
 }
 
-.ma-hero__orrery {
-  top: 50%;
-  right: clamp(-1.5rem, 1.3vw, 1.5rem);
-  width: clamp(31rem, 50vw, 47rem);
-  transform: translateY(-50%);
-  opacity: .98;
-  filter: drop-shadow(0 28px 46px rgba(0, 0, 0, .32));
-}
-
-.ma-orrery-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-  animation: ma-orrery-float 8.5s ease-in-out infinite;
-  transform-origin: 50% 50%;
-}
-
-.ma-orrery-ring--outer {
-  transform-box: view-box;
-  transform-origin: 50% 46.8%;
-  animation: ma-orrery-outer-turn 48s linear infinite;
-}
-
-.ma-orrery-ring--inner {
-  transform-box: view-box;
-  transform-origin: 50% 46.8%;
-  animation: ma-orrery-inner-turn 37s linear infinite;
-}
-
-.ma-orrery-ring--vertical {
-  transform-box: view-box;
-  transform-origin: 50% 46.8%;
-  animation: ma-orrery-vertical-sway 24s ease-in-out infinite alternate;
-}
-
-.ma-orrery-pendant {
-  transform-box: fill-box;
-  transform-origin: 50% 0%;
-  animation: ma-orrery-pendant-sway 5.8s ease-in-out infinite alternate;
-}
-
-.ma-orrery-core-glow {
-  animation: ma-orrery-core-pulse 7.5s ease-in-out infinite;
-}
-
 .ma-hero__text-veil {
   background:
-    radial-gradient(ellipse 58% 66% at 20% 48%, rgba(13, 11, 20, .44) 0%, rgba(13, 11, 20, .30) 34%, rgba(13, 11, 20, .12) 58%, rgba(13, 11, 20, 0) 78%);
+    radial-gradient(ellipse 58% 66% at 20% 48%, rgba(13, 11, 20, .32) 0%, rgba(13, 11, 20, .20) 34%, rgba(13, 11, 20, .08) 58%, rgba(13, 11, 20, 0) 78%);
 }
 
 .ma-hero-bottom-fade {
@@ -314,36 +268,6 @@
 @keyframes ma-ambient-scene {
   from { transform: scale(1.015) translate3d(0, 0, 0); }
   to   { transform: scale(1.07) translate3d(-.8%, -.45%, 0); }
-}
-
-@keyframes ma-orrery-float {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -9px, 0); }
-}
-
-@keyframes ma-orrery-outer-turn {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes ma-orrery-inner-turn {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-@keyframes ma-orrery-vertical-sway {
-  from { transform: rotate(-3deg); }
-  to { transform: rotate(3deg); }
-}
-
-@keyframes ma-orrery-pendant-sway {
-  from { transform: rotate(-3.5deg); }
-  to { transform: rotate(3.5deg); }
-}
-
-@keyframes ma-orrery-core-pulse {
-  0%, 100% { opacity: .11; }
-  50% { opacity: .29; }
 }
 
 .ma-hero__charm {
@@ -393,13 +317,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ma-hero__ambient,
-  .ma-orrery-svg,
-  .ma-orrery-ring--outer,
-  .ma-orrery-ring--inner,
-  .ma-orrery-ring--vertical,
-  .ma-orrery-pendant,
-  .ma-orrery-core-glow {
+  .ma-hero__ambient {
     animation: none !important;
     transform: none !important;
     will-change: auto !important;
@@ -611,7 +529,7 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: min(100%, 620px);
+  width: min(100%, 390px);
   height: auto;
   overflow: visible;
   filter: drop-shadow(0 18px 28px rgba(0,0,0,.32));
@@ -774,6 +692,25 @@
   transition: transform .55s cubic-bezier(.2,.7,.2,1), filter .45s ease;
 }
 
+.ma-topic-card__art-image--sprite {
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background-image: url('/images/objects/section-object-atlas.webp');
+  background-repeat: no-repeat;
+  background-size: 500% 100%;
+  background-position: 0% 50%;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.28));
+  animation: ma-card-object-float 7.8s ease-in-out infinite;
+}
+.ma-topic-card:nth-child(2) .ma-topic-card__art-image--sprite { animation-delay: -2.1s; }
+.ma-topic-card:nth-child(3) .ma-topic-card__art-image--sprite { animation-delay: -4.2s; }
+.ma-topic-card:nth-child(4) .ma-topic-card__art-image--sprite { animation-delay: -1.3s; }
+
+.ma-topic-card:hover .ma-topic-card__art-image--sprite {
+  animation-play-state: paused;
+  filter: drop-shadow(0 12px 24px rgba(201,168,76,.22)) brightness(1.08);
+}
+
 .ma-topic-card:hover .ma-topic-card__art-image {
   transform: translateY(-5px) scale(1.045);
   filter: drop-shadow(0 12px 20px rgba(201,168,76,.15));
@@ -896,6 +833,11 @@
   display: block;
   width: min(100%, 420px);
   height: auto;
+  aspect-ratio: 1 / 1;
+  background-image: url('/images/objects/section-object-atlas.webp');
+  background-repeat: no-repeat;
+  background-size: 500% 100%;
+  background-position: 100% 50%;
   filter: drop-shadow(0 14px 30px rgba(0,0,0,.25));
   animation: ma-cta-seal-float 9s ease-in-out infinite;
 }
@@ -928,6 +870,11 @@
   from { opacity: .45; transform: scale(.75); }
   to { opacity: 1; transform: scale(1.25); }
 }
+@keyframes ma-card-object-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
 @keyframes ma-cta-seal-float {
   0%, 100% { transform: translateY(0) rotate(-1deg); }
   50% { transform: translateY(-8px) rotate(1deg); }
@@ -1062,6 +1009,7 @@
   .ma-method-visual__charm,
   .ma-method-visual__spark,
   .ma-topic-card__art-image,
+  .ma-topic-card__art-image--sprite,
   .ma-topic-card__art-halo,
   .ma-final-cta__seal-halo,
   .ma-final-cta__seal-image {
