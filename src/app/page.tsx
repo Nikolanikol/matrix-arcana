@@ -244,10 +244,10 @@ export default function HomePage() {
             <div className="ma-final-cta__seal" aria-hidden="true">
               <div className="ma-final-cta__seal-halo" />
               <Image
-                src="/illustrations/cta-celestial-seal.svg"
+                src="/images/objects/orrery-object.webp"
                 alt=""
-                width={460}
-                height={460}
+                width={300}
+                height={232}
                 className="ma-final-cta__seal-image"
               />
             </div>
