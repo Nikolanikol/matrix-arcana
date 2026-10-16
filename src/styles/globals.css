@@ -1074,3 +1074,139 @@
     transform: none;
   }
 }
+
+
+/* ── Cinematic artwork pass: rendered object, luminous scene, visible motion ── */
+.ma-hero {
+  background: #0D0B14;
+}
+.ma-hero__ambient {
+  opacity: 1 !important;
+  object-fit: cover;
+  object-position: 59% 47%;
+  filter: saturate(1.12) contrast(1.035);
+  transform-origin: 62% 48%;
+  animation: ma-cinematic-scene-drift 42s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.ma-hero__base {
+  background:
+    radial-gradient(ellipse at 76% 40%, rgba(124,92,191,.12) 0%, rgba(124,92,191,0) 50%),
+    linear-gradient(90deg, rgba(13,11,20,.56) 0%, rgba(13,11,20,.40) 23%, rgba(13,11,20,.16) 45%, rgba(13,11,20,.02) 72%, rgba(13,11,20,.08) 100%);
+}
+.ma-hero__text-veil {
+  background:
+    radial-gradient(ellipse 58% 67% at 21% 49%, rgba(13,11,20,.38) 0%, rgba(13,11,20,.24) 35%, rgba(13,11,20,.08) 59%, rgba(13,11,20,0) 79%);
+}
+.ma-hero__orrery {
+  top: 50%;
+  right: clamp(.5rem, 3vw, 3.5rem);
+  width: clamp(21rem, 32vw, 29rem);
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 28px 42px rgba(0,0,0,.48));
+}
+.ma-hero__object-aura {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,92,191,.32), rgba(201,168,76,.10) 42%, transparent 72%);
+  filter: blur(19px);
+  animation: ma-hero-object-aura 8s ease-in-out infinite alternate;
+}
+.ma-hero__object {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 14px rgba(201,168,76,.12));
+  transform-origin: 50% 52%;
+  animation: ma-hero-object-float 8.6s ease-in-out infinite;
+}
+.ma-method-visual {
+  min-height: 450px;
+}
+.ma-method-visual__art {
+  width: min(100%, 470px);
+  filter: drop-shadow(0 22px 32px rgba(0,0,0,.4));
+  animation: ma-method-reliquary-float 8.4s ease-in-out infinite;
+}
+.ma-method-visual__halo {
+  width: 88%;
+  background: radial-gradient(circle, rgba(124,92,191,.26), rgba(124,92,191,.07) 42%, transparent 72%);
+}
+.ma-starfield::before {
+  opacity: .58;
+  animation:
+    ma-stars-drift-near 18s linear infinite alternate,
+    ma-stars-twinkle-near 4.8s ease-in-out infinite alternate;
+}
+.ma-starfield::after {
+  opacity: .34;
+  animation:
+    ma-stars-drift-far 27s ease-in-out infinite alternate,
+    ma-stars-twinkle-far 6.5s ease-in-out infinite alternate;
+}
+@keyframes ma-cinematic-scene-drift {
+  from { transform: scale(1.015) translate3d(.25%, 0, 0); }
+  to { transform: scale(1.075) translate3d(-.9%, -.6%, 0); }
+}
+@keyframes ma-hero-object-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-.6deg); }
+  50% { transform: translate3d(0, -11px, 0) rotate(.8deg); }
+}
+@keyframes ma-hero-object-aura {
+  from { opacity: .55; transform: scale(.92); }
+  to { opacity: .95; transform: scale(1.08); }
+}
+@media (max-width: 1023px) {
+  .ma-hero__ambient {
+    object-position: 63% 42%;
+  }
+  .ma-hero__base {
+    background:
+      linear-gradient(to bottom, rgba(13,11,20,.06) 0%, rgba(13,11,20,.04) 38%, rgba(13,11,20,.45) 62%, rgba(13,11,20,.82) 100%),
+      linear-gradient(90deg, rgba(13,11,20,.2), rgba(13,11,20,.02) 82%);
+  }
+  .ma-hero__text-veil {
+    background: radial-gradient(ellipse 92% 42% at 30% 84%, rgba(13,11,20,.33), rgba(13,11,20,0) 100%);
+  }
+  .ma-hero__orrery {
+    top: .5rem;
+    right: -4vw;
+    width: min(76vw, 340px);
+    opacity: .94;
+    transform: none;
+  }
+  .ma-hero__copy {
+    padding-bottom: 2.25rem;
+  }
+  .ma-method-visual {
+    min-height: 320px;
+  }
+  .ma-method-visual__art {
+    width: min(100%, 380px);
+  }
+}
+@media (max-width: 520px) {
+  .ma-hero__orrery {
+    top: 1.4rem;
+    right: -10vw;
+    width: min(71vw, 280px);
+    opacity: .78;
+  }
+  .ma-hero__base {
+    background: linear-gradient(to bottom, rgba(13,11,20,.10), rgba(13,11,20,.06) 44%, rgba(13,11,20,.68) 78%, #0D0B14 100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ma-hero__ambient,
+  .ma-hero__object,
+  .ma-hero__object-aura {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
