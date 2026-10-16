@@ -291,15 +291,6 @@
     opacity: .73;
   }
 
-  .ma-hero__orrery {
-    top: 1.4rem;
-    right: -10vw;
-    width: min(88vw, 430px);
-    transform: none;
-    opacity: .72;
-    filter: drop-shadow(0 18px 34px rgba(0, 0, 0, .30));
-  }
-
   .ma-hero__copy {
     max-width: 100%;
     padding-block: 1rem;
