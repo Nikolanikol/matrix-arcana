@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { t } from '@/i18n/t'
 import { PageContainer } from '@/shared/ui/PageContainer'
-import { CelestialOrrery } from '@/shared/ui/CelestialOrrery'
 
 export default function HomePage() {
   const { landing } = t()
@@ -18,10 +17,10 @@ export default function HomePage() {
       >
         <div className="ma-hero__base absolute inset-0" aria-hidden="true" />
 
-        {/* Use the existing nebula as an atmosphere, not a flat image card. */}
+        {/* Full-bleed cinematic background; the rendered orrery remains an independent foreground layer. */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
-            src="/images/backgrounds/bg-nebula.webp"
+            src="/images/hero/hero-cosmic-main.webp"
             alt=""
             fill
             priority
@@ -33,9 +32,16 @@ export default function HomePage() {
         {/* Two independently animated star planes are generated in CSS. */}
         <div className="ma-starfield pointer-events-none absolute inset-0 z-[2]" aria-hidden="true" />
 
-        {/* Main foreground object — each orbital rail moves independently. */}
+        {/* Independent rendered brass-and-amethyst object adds foreground depth and its own motion. */}
         <div className="ma-hero__orrery pointer-events-none absolute z-[3]" aria-hidden="true">
-          <CelestialOrrery />
+          <span className="ma-hero__object-aura" />
+          <Image
+            src="/images/objects/orrery-object.webp"
+            alt=""
+            width={300}
+            height={232}
+            className="ma-hero__object"
+          />
         </div>
 
         {/* Local text contrast only; this veil does not black out the scene. */}
@@ -188,6 +194,7 @@ export default function HomePage() {
               >
                 <span className="ma-topic-card__number" aria-hidden="true">{number}</span>
                 <div className="ma-topic-card__art" aria-hidden="true">
+                  <span className={`ma-topic-card__art-scene ma-topic-card__art-scene--${key}`} />
                   <span className="ma-topic-card__art-halo" />
                   <Image
                     src={icon}
